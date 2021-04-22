@@ -2,7 +2,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Thêm menu mới | Shop Hạ</title>
+    <title>Quản lý | Shop Hạ</title>
 @endsection
 
 @section('sidebar')
@@ -12,23 +12,23 @@
 @endsection
 
 @section('content')
-    @include('partials/content-header',['name'=>'Menus','key'=>'Add'])
+    @include('partials.content-header',['name'=>'category','key'=>'Add'])
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <form class="col-md-6" action="{{route('menus.store')}}" method="post">
+                <form class="col-md-6" action="{{route('categories.store')}}" method="post">
                     @csrf
                     <div class="row mb-3">
-                        <label for="" class="form-label">Menu cha</label>
+                        <label for="" class="form-label">Danh mục cha</label>
                         <select name="parent_id" class="form-control">
-                            <option value="0">Chọn menu cha</option>
-                            {!! $optionSelect !!}}
+                            <option value="0">Chọn danh mục cha</option>
+                            {!! $htmlOption !!}}
                         </select>
                     </div>
                     <div class="row mb-3">
-                        <label for="" class="form-label">Tên menu</label>
-                        <input type="text" class="form-control" name="name" placeholder="Nhập tên menu">
+                        <label for="" class="form-label">Tên danh mục</label>
+                        <input type="text" class="form-control" name="name" placeholder="Nhập tên danh mục">
                     </div>
                     <button type="submit" class="btn btn-primary">Thêm</button>
                 </form>

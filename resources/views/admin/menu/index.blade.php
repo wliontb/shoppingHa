@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    @include('partials/content-header',['name'=>'Menu','key'=>'List'])
+    @include('partials.content-header',['name'=>'Menu','key'=>'List'])
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
