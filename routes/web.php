@@ -19,6 +19,10 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
 Route::prefix('admin')->group(function () {
     Route::prefix('categories')->group(function () {
         Route::get('/',[
@@ -82,6 +86,19 @@ Route::prefix('admin')->group(function () {
             'as' => 'menus.delete',
             'uses' => 'MenuController@delete'
         ]);
+    });
+
+    Route::prefix('products')->group(function () {
+        Route::get('/',[
+            'as' => 'products.index',
+            'uses' => 'AdminProductController@index'
+        ]);
+
+        Route::get('/create',[
+            'as' => 'products.create',
+            'uses' => 'AdminProductController@create'
+        ]);
+
     });
 });
 
