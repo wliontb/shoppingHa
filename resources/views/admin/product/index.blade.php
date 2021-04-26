@@ -4,6 +4,10 @@
 @section('title')
     <title>Quản lý sản phẩm | Shop Hạ</title>
 @endsection
+    <link rel="stylesheet" href="{{asset('admins/product/list.css')}}">
+@section('css')
+
+@endsection
 
 @section('content')
     @include('partials.content-header',['name'=>'Products','key'=>'List'])
@@ -27,26 +31,26 @@
                         </tr>
                         </thead>
                         <tbody>
-{{--                        @foreach($categories as $category)--}}
+                        @foreach($products as $productItem)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Iphone 15</td>
-                                <td>1000$</td>
-                                <td>-</td>
-                                <td>Điện thoại</td>
+                                <th scope="row">{{$productItem->id}}</th>
+                                <td>{{$productItem->name}}</td>
+                                <td>{{$productItem->price}}</td>
+                                <td><img src="{{$productItem->feature_image_path}}" class="thumbnail-img"></td>
+                                <td>{{$productItem->category->name}}</td>
                                 <td>
-                                    <a href="" class="btn btn-warning">Sửa</a>
+                                    <a href="{{route('products.edit',[$productItem->id])}}" class="btn btn-warning">Sửa</a>
                                     <a href="" class="btn btn-danger">Xóa</a>
                                 </td>
                             </tr>
-{{--                        @endforeach--}}
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
-{{--        {{$categories->links()}}--}}
+        {{$products->links()}}
     </div>
     <!-- /.content -->
 @endsection

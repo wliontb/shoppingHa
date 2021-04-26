@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Thêm sản phẩm mới | Shop Hạ</title>
+    <title>Sửa sản phẩm | Shop Hạ</title>
 @endsection
 
 @section('css')
@@ -10,9 +10,9 @@
 @endsection
 
 @section('content')
-    @include('partials.content-header',['name'=>'Products','key'=>'Add'])
+    @include('partials.content-header',['name'=>'Products','key'=>'Edit'])
     <!-- Main content -->
-    <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('products.update',[$product->id])}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="content">
             <div class="container-fluid">
@@ -27,23 +27,38 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Tên sản phẩm</label>
-                            <input type="text" class="form-control" name="name" placeholder="Nhập tên sản phẩm">
+                            <input type="text" value="{{$product->name}}" class="form-control" name="name" placeholder="Nhập tên sản phẩm">
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Giá sản phẩm</label>
-                            <input type="text" class="form-control" name="price" placeholder="Nhập giá sản phẩm">
+                            <input type="text" value="{{$product->price}}" class="form-control" name="price" placeholder="Nhập giá sản phẩm">
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Ảnh đại diện</label>
                             <input type="file" class="form-control-file" name="feature_image_path">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="{{$product->feature_image_path}}" class="mw-100" alt="">
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Ảnh chi tiết</label>
                             <input type="file" multiple class="form-control-file" name="image_path[]">
+                            <div class="row">
+                                @foreach($product->productimages as $imageItem)
+                                <div class="col-md-4">
+                                    <img src="{{$imageItem->image_path}}" class="mw-100" alt="">
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Từ khóa cho sản phẩm</label>
                             <select class="form-control tags_select_choose" name="tags[]" multiple="multiple">
+                                @foreach($product->tags as $tagItem)
+                                    <option value="{{$tagItem->name}}" selected>{{$tagItem->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -51,12 +66,12 @@
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Nội dung sản phẩm</label>
                             <textarea name="contents" id="" cols="30" rows="10" class="my-editor form-control">
-
+                                {{$product->content}}
                             </textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <button type="submit" class="btn btn-warning">Sửa</button>
                     </div>
 
                 </div>
