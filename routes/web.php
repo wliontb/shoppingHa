@@ -114,6 +114,34 @@ Route::prefix('admin')->group(function () {
 
     });
 
+    Route::prefix('sliders')->group(function () {
+        Route::get('/',[
+            'as' => 'sliders.index',
+            'uses' => 'SliderAdminController@index'
+        ]);
+
+        Route::get('/create',[
+            'as' => 'sliders.create',
+            'uses' => 'SliderAdminController@create'
+        ]);
+
+        Route::post('/store',[
+            'as' => 'sliders.store',
+            'uses' => 'SliderAdminController@store'
+        ]);
+
+        Route::get('/edit/{id}',[
+            'as' => 'sliders.edit',
+            'uses' => 'SliderAdminController@edit'
+        ]);
+
+        Route::post('/update/{id}',[
+            'as' => 'sliders.update',
+            'uses' => 'SliderAdminController@update'
+        ]);
+
+    });
+
     Route::prefix('settings')->group(function () {
         Route::get('/',[
             'as' => 'settings.index',

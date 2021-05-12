@@ -8,7 +8,7 @@ class AdminController extends Controller
 {
     public function loginAdmin(){
         if(auth()->check()){
-            return redirect()->to('home');
+            return redirect()->to('admin/categories');
         }
         return view('login');
     }
