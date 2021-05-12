@@ -15,9 +15,7 @@ Route::get('/admin','AdminController@loginAdmin');
 
 Route::post('/admin','AdminController@postLoginAdmin');
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index');
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
@@ -165,6 +163,33 @@ Route::prefix('admin')->group(function () {
             'uses' => 'AdminUserController@delete'
         ]);
 
+    });
+
+    Route::prefix('roles')->group(function () {
+        Route::get('/',[
+            'as' => 'roles.index',
+            'uses' => 'AdminRoleController@index'
+        ]);
+
+        Route::get('/create',[
+            'as' => 'roles.create',
+            'uses' => 'AdminRoleController@create'
+        ]);
+
+        Route::post('/store',[
+            'as' => 'roles.store',
+            'uses' => 'AdminRoleController@store'
+        ]);
+
+        Route::get('/edit/{id}',[
+            'as' => 'roles.edit',
+            'uses' => 'AdminRoleController@edit'
+        ]);
+
+        Route::post('/update/{id}',[
+            'as' => 'roles.update',
+            'uses' => 'AdminRoleController@update'
+        ]);
     });
 });
 
