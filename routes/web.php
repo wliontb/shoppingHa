@@ -11,11 +11,42 @@
 |
 */
 
+
 Route::get('/admin','AdminController@loginAdmin');
 
 Route::post('/admin','AdminController@postLoginAdmin');
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/category/{slug}/{id}',[
+    'as' => 'home.category',
+    'uses' => 'HomeController@category'
+]);
+
+Route::get('/destroycart',[
+    'as' => 'destroycart',
+    'uses' => 'ShoppingController@destroycart'
+]);
+
+Route::get('/removecart/{id}',[
+    'as' => 'removecart',
+    'uses' => 'ShoppingController@removecart'
+]);
+
+Route::get('/addtocart/{id}',[
+    'as' => 'addtocart',
+    'uses' => 'ShoppingController@addtocart'
+]);
+
+Route::get('/checkout',[
+    'as' => 'checkout',
+    'uses' => 'ShoppingController@checkout'
+]);
+
+Route::get('/cart',[
+    'as' => 'cart',
+    'uses' => 'ShoppingController@cart'
+]);
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();

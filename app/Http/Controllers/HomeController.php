@@ -21,7 +21,14 @@ class HomeController extends Controller
         $sliders = $this->slider->latest()->get();
         $categorys = $this->category->where('parent_id',0)->latest()->get();
         $products = $this->product->latest()->take(6)->get();
+        $products_recommend = $this->product->latest('views_count','desc')->get();
 
-        return view('home.home',compact('sliders','categorys','products'));
+        return view('home.home',compact('sliders','categorys','products','products_recommend'));
+    }
+
+    public function category($slug, $id){
+        $categorys = $this->category->where('parent_id',0)->latest()->get();
+        $products = $this->product->where('category_id',$id)->get();
+        return view('home.category',compact('categorys','products'));
     }
 }
