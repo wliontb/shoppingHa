@@ -26,15 +26,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($sliders as $slider)
+                        @foreach($sliders as $key=>$slider)
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">{{$key+1}}</th>
                                 <td>{{$slider->name}}</td>
                                 <td>{{$slider->description}}</td>
-                                <td>{{$slider->image_path}}</td>
+                                <td><img class="img-size-50"  src="{{$slider->image_path}}" alt=""></td>
                                 <td>
                                     <a href="{{route('sliders.edit',[$slider->id])}}" class="btn btn-warning">Sửa</a>
-                                    <a href="#" class="btn btn-danger">Xóa</a>
+                                    <a href="{{route('sliders.delete',[$slider->id])}}" onclick="return confirm('Bạn có chắc muốn xóa slide này ?')" class="btn btn-danger">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach

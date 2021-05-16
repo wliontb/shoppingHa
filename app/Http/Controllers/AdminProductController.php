@@ -10,6 +10,7 @@ use App\Tag;
 use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class AdminProductController extends Controller
 {
@@ -51,9 +52,16 @@ class AdminProductController extends Controller
             $dataProductCreate = [
                 'name' => $request->name,
                 'price' => $request->price,
+                'old_price' => $request->old_price,
+                'description' => $request->description,
                 'content' => $request->contents,
+                'author' => $request->author,
+                'publisher' => $request->publisher,
+                'page' => $request->page,
+                'count' => $request->count,
                 'user_id' => auth()->id(),
                 'category_id' => $request->category_id,
+                'views_count' => 0,
 
             ];
             $dataUploadFeatureImage = $this->storageTraitUpload($request, 'feature_image_path', 'product');
@@ -87,7 +95,7 @@ class AdminProductController extends Controller
             return redirect()->route('products.index');
         } catch (\Exception $exception) {
             DB::rollBack();
-            log::error('Message : '.$exception->getMessage().'-- Line : '.$exception->getLine());
+            Log::error('Message : '.$exception->getMessage().'-- Line : '.$exception->getLine());
         }
     }
 
@@ -103,7 +111,13 @@ class AdminProductController extends Controller
             $dataProductUpdate = [
                 'name' => $request->name,
                 'price' => $request->price,
+                'old_price' => $request->old_price,
+                'description' => $request->description,
                 'content' => $request->contents,
+                'author' => $request->author,
+                'publisher' => $request->publisher,
+                'page' => $request->page,
+                'count' => $request->count,
                 'user_id' => auth()->id(),
                 'category_id' => $request->category_id,
 
@@ -140,7 +154,12 @@ class AdminProductController extends Controller
             return redirect()->route('products.index');
         } catch (\Exception $exception) {
             DB::rollBack();
-            log::error('Message : '.$exception->getMessage().'-- Line : '.$exception->getLine());
+            Log::error('Message : '.$exception->getMessage().'-- Line : '.$exception->getLine());
         }
+    }
+
+    public function delete($id){
+        $this->product->find($id)->delete();
+        return redirect()->route('products.index');
     }
 }

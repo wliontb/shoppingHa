@@ -27,36 +27,60 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Tên sản phẩm</label>
-                            <input type="text" class="form-control" name="name" placeholder="Nhập tên sản phẩm">
+                            <input type="text" class="form-control" required name="name" placeholder="Nhập tên sản phẩm">
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Giá sản phẩm</label>
-                            <input type="text" class="form-control" name="price" placeholder="Nhập giá sản phẩm">
+                            <input type="number" min="0" class="form-control" required name="price" placeholder="Nhập giá sản phẩm">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Giá sản phẩm cũ</label>
+                            <input type="number" min="0" class="form-control" required name="old_price" placeholder="Nhập giá cũ">
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Ảnh đại diện</label>
-                            <input type="file" class="form-control-file" name="feature_image_path">
+                            <input type="file" class="form-control-file" name="feature_image_path" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Ảnh chi tiết</label>
-                            <input type="file" multiple class="form-control-file" name="image_path[]">
+                            <input type="file" multiple class="form-control-file" required name="image_path[]">
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Từ khóa cho sản phẩm</label>
                             <select class="form-control tags_select_choose" name="tags[]" multiple="multiple">
                             </select>
                         </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Tác giả</label>
+                            <input type="text" class="form-control" name="author" required placeholder="Nhập tên tác giả">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Nhà xuất bản</label>
+                            <input type="text" class="form-control" name="publisher" required placeholder="Nhập tên nhà xuất bản">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Số trang</label>
+                            <input type="number" min="0" max="10000" class="form-control" name="page" required placeholder="Nhập số lượng trang sách">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Số sản phẩm trong kho</label>
+                            <input type="number" min="0" value="100" class="form-control" name="count" placeholder="Nhập số sản phẩm trong kho" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Mô tả sản phẩm</label>
+                            <textarea name="description" maxlength="190" id="" cols="30" rows="5" class="form-control"></textarea>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Nội dung sản phẩm</label>
-                            <textarea name="contents" id="" cols="30" rows="10" class="my-editor form-control">
-
-                            </textarea>
+                            <textarea name="contents" cols="30" rows="10" class="my-editor form-control"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
                     </div>
 
                 </div>

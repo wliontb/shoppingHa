@@ -12,15 +12,48 @@
 */
 
 
-Route::get('/admin','AdminController@loginAdmin');
+Route::get('/login','AdminController@loginAdmin')->name('login');
 
-Route::post('/admin','AdminController@postLoginAdmin');
+Route::post('/login','AdminController@postLoginAdmin');
+
+Route::get('/register','AdminController@register')->name('register');
+
+Route::post('/register','AdminController@postregister');
+
+Route::get('/admin/index','AdminController@index')->name('admin.index');
+
+Route::get('/logout','AdminController@logout')->name('logout');
 
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/category/{slug}/{id}',[
     'as' => 'home.category',
     'uses' => 'HomeController@category'
+]);
+
+Route::get('/search',[
+    'as' => 'search',
+    'uses' => 'HomeController@search'
+]);
+
+Route::get('/account',[
+    'as' => 'account',
+    'uses' => 'HomeController@account'
+]);
+
+Route::post('/updateaccount',[
+    'as' => 'updateaccount',
+    'uses' => 'HomeController@updateaccount'
+]);
+
+Route::post('/changepassword',[
+    'as' => 'changepassword',
+    'uses' => 'HomeController@changepassword'
+]);
+
+Route::get('/product/{id}',[
+    'as' => 'product',
+    'uses' => 'HomeController@product'
 ]);
 
 Route::get('/destroycart',[
@@ -33,9 +66,19 @@ Route::get('/removecart/{id}',[
     'uses' => 'ShoppingController@removecart'
 ]);
 
+Route::post('/addorder',[
+    'as' => 'addorder',
+    'uses' => 'ShoppingController@addorder'
+]);
+
 Route::get('/addtocart/{id}',[
     'as' => 'addtocart',
     'uses' => 'ShoppingController@addtocart'
+]);
+
+Route::post('/addtocart_qty/{id}',[
+    'as' => 'addtocart_qty',
+    'uses' => 'ShoppingController@addtocart_qty'
 ]);
 
 Route::get('/checkout',[
@@ -53,6 +96,48 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 });
 
 Route::prefix('admin')->group(function () {
+    Route::prefix('orders')->group(function () {
+        Route::get('/',[
+            'as' => 'orders.index',
+            'uses' => 'OrderController@index'
+        ]);
+
+        Route::get('/create',[
+            'as' => 'orders.create',
+            'uses' => 'OrderController@create'
+        ]);
+
+        Route::post('/store',[
+            'as' => 'orders.store',
+            'uses' => 'OrderController@store'
+        ]);
+
+        Route::get('/edit/{id}',[
+            'as' => 'orders.edit',
+            'uses' => 'OrderController@edit'
+        ]);
+
+        Route::get('/delete/{id}',[
+            'as' => 'orders.delete',
+            'uses' => 'OrderController@delete'
+        ]);
+
+        Route::get('/active/{id}',[
+            'as' => 'orders.active',
+            'uses' => 'OrderController@active'
+        ]);
+
+        Route::post('/update/{id}',[
+            'as' => 'orders.update',
+            'uses' => 'OrderController@update'
+        ]);
+
+        Route::get('/detail/{id}',[
+            'as' => 'orders.detail',
+            'uses' => 'OrderController@detail'
+        ]);
+    });
+
     Route::prefix('categories')->group(function () {
         Route::get('/',[
             'as' => 'categories.index',
@@ -143,6 +228,11 @@ Route::prefix('admin')->group(function () {
             'uses' => 'AdminProductController@update'
         ]);
 
+        Route::get('/delete/{id}',[
+            'as' => 'products.delete',
+            'uses' => 'AdminProductController@delete'
+        ]);
+
     });
 
     Route::prefix('sliders')->group(function () {
@@ -169,6 +259,11 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}',[
             'as' => 'sliders.update',
             'uses' => 'SliderAdminController@update'
+        ]);
+
+        Route::get('/delete/{id}',[
+            'as' => 'sliders.delete',
+            'uses' => 'SliderAdminController@delete'
         ]);
 
     });

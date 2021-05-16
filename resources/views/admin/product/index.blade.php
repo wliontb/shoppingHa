@@ -40,7 +40,7 @@
                                 <td>{{$productItem->category->name}}</td>
                                 <td>
                                     <a href="{{route('products.edit',[$productItem->id])}}" class="btn btn-warning">Sửa</a>
-                                    <a href="" class="btn btn-danger">Xóa</a>
+                                    <a href="{{route('products.delete',[$productItem->id])}}" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này ?')" class="btn btn-danger">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -1,33 +1,99 @@
-<div class="features_items"><!--features_items-->
-    <h2 class="title text-center">Features Items</h2>
-    @foreach($products as $product)
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="{{$product->feature_image_path}}" alt=""/>
-                        <h2>{{number_format($product->price)}}đ</h2>
-                        <p>{{$product->name}}</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i
-                                class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
-                    </div>
-                    <div class="product-overlay">
-                        <div class="overlay-content">
-                            <h2>{{number_format($product->price)}}đ</h2>
-                            <p>{{$product->name}}</p>
-                            <a href="{{route('addtocart',[$product->id])}}" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="choose">
-                    <ul class="nav nav-pills nav-justified">
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+<div class="featured-product-area section-padding">
+    <h2 class="section-title">SẢN PHẨM MỚI NHẤT</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-menu">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="first-item active">
+                            <a href="#arrival" aria-controls="arrival" role="tab" data-toggle="tab">Sách Mới</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#sale" aria-controls="sale" role="tab" data-toggle="tab">BÁN CHẠY</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-    @endforeach
-
-</div><!--features_items-->
+        <div class="row">
+            <div class="product-list tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="arrival">
+                    <div class="featured-product-list indicator-style">
+                        @foreach($products as $product)
+                        <div class="single-p-banner">
+                            <div class="col-md-3">
+                                <div class="single-banner">
+                                    <div class="product-wrapper">
+                                        <a href="#" class="single-banner-image-wrapper">
+                                            <img alt="" src="{{$product->feature_image_path}}">
+                                            <div class="price">{{number_format($product->price)}}<span>đ</span></div>
+                                        </a>
+                                        <div class="product-description">
+                                            <div class="functional-buttons">
+                                                <a href="{{route('addtocart',[$product->id])}}" title="Thêm vào giỏ">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="banner-bottom text-center">
+                                        <div class="banner-bottom-title">
+                                            <a href="{{route('product',[$product->id])}}">{{$product->name}}</a>
+                                        </div>
+                                        <div class="rating-icon">
+                                            <i class="fa fa-star icolor"></i>
+                                            <i class="fa fa-star icolor"></i>
+                                            <i class="fa fa-star icolor"></i>
+                                            <i class="fa fa-star icolor"></i>
+                                            <i class="fa fa-star icolor"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="sale">
+                    <div class="featured-product-list indicator-style">
+                        @foreach($products_recommend as $product)
+                        <div class="single-p-banner">
+                            <div class="col-md-3">
+                                <div class="single-banner">
+                                    <div class="product-wrapper">
+                                        <a href="#" class="single-banner-image-wrapper">
+                                            <img alt="" src="{{$product->feature_image_path}}">
+                                            <div class="price">{{number_format($product->price)}}<span>đ</span></div>
+                                        </a>
+                                        <div class="product-description">
+                                            <div class="functional-buttons">
+                                                <a href="{{route('addtocart',[$product->id])}}" title="Thêm vào giỏ">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </a>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="banner-bottom text-center">
+                                        <div class="banner-bottom-title">
+                                            <a href="{{route('product',[$product->id])}}">{{$product->name}}</a>
+                                        </div>
+                                        <div class="rating-icon">
+                                            <i class="fa fa-star icolor "></i>
+                                            <i class="fa fa-star icolor "></i>
+                                            <i class="fa fa-star icolor "></i>
+                                            <i class="fa fa-star icolor "></i>
+                                            <i class="fa fa-star icolor "></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -76,4 +76,9 @@ class SliderAdminController extends Controller
             Log::error('Message : '.$exception->getMessage().'-- Line : '.$exception->getLine());
         }
     }
+
+    public function delete($id){
+        $this->slider->find($id)->delete();
+        return redirect()->back();
+    }
 }

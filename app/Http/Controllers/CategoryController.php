@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Components\Recusive;
+use App\Traits\StorageImageTrait;
 
 class CategoryController extends Controller
 {
+    use StorageImageTrait;
     private $category;
     public function __construct(Category $category){
         $this->category = $category;
@@ -26,11 +28,18 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request){
-        $this->category->create([
+        $dataInsert = [
             'name' => $request->name,
             'parent_id' => $request->parent_id,
             'slug' => str_slug($request->name),
-        ]);
+            'description' => $request->description,
+            'recommend' => $request->recommend,
+        ];
+        $dataUploadFeatureImage = $this->storageTraitUpload($request, 'feature_image_path', 'category');
+        if(!empty($dataUploadFeatureImage)){
+            $dataInsert['feature_image_path'] = $dataUploadFeatureImage['file_path'];
+        }
+        $this->category->create($dataInsert);
 
         return redirect()->route('categories.index');
     }
@@ -52,11 +61,20 @@ class CategoryController extends Controller
     }
 
     public function update($id, Request $request){
-        $this->category->find($id)->update([
+        $dataUpdate = [
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-            'slug' => str_slug($request->name)
-        ]);
+            'slug' => str_slug($request->name),
+            'description' => $request->description,
+            'recommend' => $request->recommend,
+        ];
+
+        $dataUploadFeatureImage = $this->storageTraitUpload($request, 'feature_image_path', 'category');
+        if(!empty($dataUploadFeatureImage)){
+            $dataUpdate['feature_image_path'] = $dataUploadFeatureImage['file_path'];
+        }
+
+        $this->category->find($id)->update($dataUpdate);
         return redirect()->route('categories.index');
     }
 

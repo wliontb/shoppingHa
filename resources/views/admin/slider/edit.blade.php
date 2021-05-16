@@ -30,11 +30,7 @@
                     <div class="row mb-3">
                         <label for="" class="form-label">Hình ảnh</label>
                         <input type="file" value="$slider->image_path" class="form-control @error('image_path') is-invalid @enderror" name="image_path">
-                        <div class="col-md-4">
-                            <div class="row">
-                                <img src="{{$slider->image_path}}" alt="">
-                            </div>
-                        </div>
+                        <img src="{{$slider->image_path}}" class="mw-100" alt="">
                         @error('image_path')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

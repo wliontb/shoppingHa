@@ -1,91 +1,101 @@
 @extends('layouts.master')
 
 @section('title')
-    <title>Giỏ hàng</title>
+    <title>Giỏ hàng - Shop Hạ</title>
 @endsection
 
 @section('css')
-    <link href="/eshopper/css/responsive.css" rel="stylesheet">
-    <style>
-        .cart_product img {
-            max-width: 80px;
-        }
-    </style>
 @endsection
 
 @section('content')
-    <section id="cart_items">
-        <div class="container">
-            <div class="breadcrumbs">
-                <ol class="breadcrumb">
-                    <li><a href="{{route('home')}}">Trang chủ</a></li>
-                    <li class="active">Giỏ hàng</li>
-                </ol>
-            </div>
-            <div class="table-responsive cart_info">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr class="cart_menu">
-                        <td class="image">Sản phẩm</td>
-                        <td class="description"></td>
-                        <td class="price">Giá</td>
-                        <td class="quantity">Số lượng</td>
-                        <td class="total">Tổng tiền</td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($products as $product)
-                        <tr>
-                            <td class="cart_product">
-                                <a href=""><img src="{{$product->options['image']}}" alt=""></a>
-                            </td>
-                            <td class="cart_description">
-                                <h4><a href="">{{$product->name}}</a></h4>
-                                <p>Web ID: </p>
-                            </td>
-                            <td class="cart_price">
-                                <p>{{number_format($product->price)}}</p>
-                            </td>
-                            <td class="cart_quantity">
-                                <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href=""> + </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity" value="{{$product->qty}}"
-                                           autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href=""> - </a>
-                                </div>
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">{{$product->price*$product->qty}}</p>
-                            </td>
-                            <td class="cart_delete">
-                                <a class="cart_quantity_delete" href="{{route('removecart',[$product->rowId])}}"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section> <!--/#cart_items-->
-
-    <section id="do_action">
+    @include('components.breadcrumb',['key'=>'Giỏ Hàng'])
+    <!-- Cart Area Start -->
+    @if($errors->any())
+        <h4>{{$errors->first()}}</h4>
+    @endif
+    <div class="shopping-cart-area section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="total_area">
-                        <ul>
-                            <li>Cart Sub Total <span>{{Cart::subtotal()}}đ</span></li>
-                            <li>Shipping Cost <span>Free</span></li>
-                            <li>Total <span>{{Cart::subtotal()}}đ</span></li>
-                        </ul>
-                        <a class="btn btn-default update" href="">Cập nhật</a>
-                        <a class="btn btn-default check_out" href="{{route('checkout')}}">Thanh toán</a>
+                <div class="col-md-12">
+                    <div class="wishlist-table-area table-responsive">
+                        @if(Cart::count()==0)
+                            <b>Giỏ hàng trống !</b>
+                        @endif
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="product-remove">Xóa</th>
+                                <th class="product-image">Hình Ảnh</th>
+                                <th class="t-product-name">Tên Sản Phẩm</th>
+                                <th class="product-unit-price">Giá</th>
+                                <th class="product-quantity">Số Lượng</th>
+                                <th class="product-subtotal">Tổng Tiền</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach(Cart::content() as $cart)
+                                <tr>
+                                    <td class="product-remove">
+                                        <a href="{{route('removecart',['id'=>$cart->rowId])}}">
+                                            <i class="flaticon-delete"></i>
+                                        </a>
+                                    </td>
+                                    <td class="product-image">
+                                        <a href="#">
+                                            <img src="{{$cart->options['image']}}" style="width: 104px;height: 154px"
+                                                 alt="">
+                                        </a>
+                                    </td>
+                                    <td class="t-product-name">
+                                        <h3>
+                                            <a href="#">{{$cart->name}}</a>
+                                        </h3>
+                                    </td>
+                                    <td class="product-unit-price">
+                                        <p>{{number_format($cart->price)}}đ</p>
+                                    </td>
+                                    <td class="product-quantity product-cart-details">
+                                        <input type="number" value="{{$cart->qty}}">
+                                    </td>
+                                    <td class="product-quantity">
+                                        <p>{{number_format($cart->price*$cart->qty)}}đ</p>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="shopingcart-bottom-area">
+                        <a class="left-shoping-cart" href="{{route('home')}}">TIẾP TỤC MUA HÀNG</a>
+                        <div class="shopingcart-bottom-area pull-right">
+                            <a class="right-shoping-cart" href="{{route('destroycart')}}">XÓA GIỎ HÀNG</a>
+                            <a class="right-shoping-cart" href="#">CẬP NHẬT GIỎ HÀNG</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section><!--/#do_action-->
+    </div>
+    <!-- Cart Area End -->
+    <!-- Discount Area Start -->
+    <div class="discount-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="subtotal-main-area">
+                        <div class="subtotal-area">
+                            <h2>PHÍ SHIP<span>0đ</span></h2>
+                        </div>
+                        <div class="subtotal-area">
+                            <h2>TỔNG TIỀN<span>{{Cart::subtotal()}}đ</span></h2>
+                        </div>
+                        <a href="{{Cart::count()==0 ? '#' : route('checkout')}}">THANH TOÁN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Discount Area End -->
 
 @endsection
 

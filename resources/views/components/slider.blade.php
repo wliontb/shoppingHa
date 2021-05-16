@@ -1,41 +1,32 @@
-<section id="slider"><!--slider-->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        @foreach($sliders as $key=>$slider)
-                        <li data-target="#slider-carousel" data-slide-to="{{$key}}" {{$key==0 ? 'class="active"' : ''}}></li>
-                        @endforeach
-                    </ol>
-
-                    <div class="carousel-inner">
-{{--                        {{dd($sliders)}}--}}
-                        @foreach($sliders as $key => $slider)
-                        <div class="item {{$key==0 ? 'active' : ''}}">
-                            <div class="col-sm-6">
-                                <h1><span>E</span>-SHOPPER</h1>
-                                <h2>{{$slider->name}}</h2>
-                                <p>{{$slider->description}}</p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-                                <img src="{{$slider->image_path}}" class="girl img-responsive" alt="" />
-                                <img src="/eshopper/images/home/pricing.png"  class="pricing" alt="" />
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-
-                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </div>
-
+<div class="slider-area">
+    <div class="bend niceties preview-1">
+        <div id="ensign-nivoslider" class="slides">
+            @foreach($sliders as $key => $slider)
+            <img src="{{$slider->image_path}}" alt="" title="#slider-direction-{{$key+1}}"/>
+            @endforeach
+        </div>
+        @foreach($sliders as $key=>$slider)
+        <div id="slider-direction-{{$key+1}}" class="text-center slider-direction">
+            <!-- layer 1 -->
+            <div class="layer-1">
+                <h2 class="title-1">{{$slider->name}}</h2>
+            </div>
+            <!-- layer 2 -->
+            <div class="layer-2">
+                <p class="title-2">{{$slider->description}}</p>
+            </div>
+            <!-- layer 3 -->
+            <div class="layer-3">
+                <a href="#" class="title-3">XEM THÊM</a>
+            </div>
+            <!-- layer 4 -->
+            <div class="layer-4">
+                <form action="{{route('search')}}" class="title-4">
+                    <input type="text" name="keyword" placeholder="Nhập tên sách bạn cần tìm">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
             </div>
         </div>
+        @endforeach
     </div>
-</section><!--/slider-->
+</div>

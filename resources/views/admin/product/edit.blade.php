@@ -27,11 +27,15 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Tên sản phẩm</label>
-                            <input type="text" value="{{$product->name}}" class="form-control" name="name" placeholder="Nhập tên sản phẩm">
+                            <input type="text" maxlength="191" value="{{$product->name}}" class="form-control" name="name" placeholder="Nhập tên sản phẩm" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Giá sản phẩm</label>
-                            <input type="text" value="{{$product->price}}" class="form-control" name="price" placeholder="Nhập giá sản phẩm">
+                            <input type="number" min="0" value="{{$product->price}}" class="form-control" name="price" placeholder="Nhập giá sản phẩm" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Giá cũ sản phẩm</label>
+                            <input type="number" min="0" value="{{$product->old_price}}" class="form-control" name="old_price" placeholder="Nhập giá cũ sản phẩm" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Ảnh đại diện</label>
@@ -61,6 +65,28 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Tác giả</label>
+                            <input type="text" maxlength="191" value="{{$product->author}}" class="form-control" name="author" placeholder="Nhập tên tác giả" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Nhà xuất bản</label>
+                            <input type="text" maxlength="191" value="{{$product->publisher}}" class="form-control" name="publisher" placeholder="Nhập tên nhà xuất bản" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Số trang</label>
+                            <input type="number" min="0" value="{{$product->page}}" class="form-control" name="page" placeholder="Nhập số trang sách" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Số sản phẩm</label>
+                            <input type="number" min="0" value="{{$product->count}}" class="form-control" name="count" placeholder="Nhập số sản phẩm trong kho" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mb-3">
+                            <label for="" class="form-label">Mô tả sản phẩm</label>
+                            <textarea name="description" id="" cols="30" rows="5" maxlength="191" class="form-control">{{$product->description}}</textarea>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group mb-3">
@@ -71,7 +97,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-warning">Sửa</button>
+                        <button type="submit" class="btn btn-warning">Sửa sản phẩm</button>
                     </div>
 
                 </div>

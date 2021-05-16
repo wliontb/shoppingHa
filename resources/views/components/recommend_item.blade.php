@@ -1,5 +1,5 @@
 <div class="recommended_items"><!--recommended_items-->
-    <h2 class="title text-center">recommended items</h2>
+    <h2 class="title text-center">Sản phẩm nổi bật</h2>
 
     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -14,7 +14,7 @@
                                         <img src="{{$itemProductRecommend->feature_image_path}}" alt=""/>
                                         <h2>{{number_format($itemProductRecommend->price)}}</h2>
                                         <p>{{$itemProductRecommend->name}}</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
+                                        <a href="{{route('addtocart',[$itemProductRecommend->id])}}" class="btn btn-default add-to-cart"><i
                                                 class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
                                     </div>
 

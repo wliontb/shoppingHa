@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
     @yield('css')
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini dark-mode">
 <div class="wrapper">
     @include('partials/header')
 
